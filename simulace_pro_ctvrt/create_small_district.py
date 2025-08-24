@@ -343,14 +343,25 @@ def save_district_model(output_dir='output'):
     """
     Vytvoří a uloží malou čtvrť jako HBJSON.
     """
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+    # Vytvoření absolutní cesty k výstupnímu adresáři
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    output_path = os.path.join(current_dir, output_dir)
+    
+    # Vytvoření adresáře (včetně rodičovských adresářů)
+    os.makedirs(output_path, exist_ok=True)
+    print(f"Výstupní adresář: {output_path}")
     
     # Vytvoření modelu pomocí oficiálních Honeybee funkcí
     model = create_ostrava_district()
     
-    # Uložení
-    output_file = os.path.join(output_dir, 'ostrava_small_district.hbjson')
+    # Uložení s kontrolou cesty
+    output_file = os.path.join(output_path, 'ostrava_small_district.hbjson')
+    print(f"Ukládám do: {output_file}")
+    
+    # Kontrola, že adresář skutečně existuje
+    if not os.path.exists(output_path):
+        raise FileNotFoundError(f"Výstupní adresář neexistuje: {output_path}")
+    
     model.to_hbjson(output_file)
     
     print(f"Model uložen do: {os.path.abspath(output_file)}")

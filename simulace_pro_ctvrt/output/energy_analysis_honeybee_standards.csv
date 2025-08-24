@@ -1,0 +1,11 @@
+room_id,building_type,building_type_code,floor_number,has_roof,floor_area_m2,volume_m3,annual_consumption_kwh,lighting_kwh_year,equipment_kwh_year,heating_kwh_year,gas_kwh_year,annual_cost_czk,cost_per_m2_czk,honeybee_standard
+ResidentialBuilding_01_Floor1,Bytový dům,residentialbuilding,1,False,96.0,288.0,8567.1,1696.2,1730.6,5140.2,0,29985.0,312.0,MidriseApartment
+ResidentialBuilding_01_Floor2,Bytový dům,residentialbuilding,2,False,96.0,288.0,8567.1,1696.2,1730.6,5140.2,0,29985.0,312.0,MidriseApartment
+ResidentialBuilding_01_Floor3,Bytový dům,residentialbuilding,3,True,117.2,48.0,10458.4,2070.7,2112.7,6275.1,0,36605.0,312.0,MidriseApartment
+OfficeBuilding_01_Floor1,Bytový dům,officebuilding,1,False,150.0,450.0,13386.0,2650.4,2704.1,8031.6,0,46851.0,312.0,MidriseApartment
+OfficeBuilding_01_Floor2,Bytový dům,officebuilding,2,False,150.0,450.0,13386.0,2650.4,2704.1,8031.6,0,46851.0,312.0,MidriseApartment
+OfficeBuilding_01_Floor3,Bytový dům,officebuilding,3,False,150.0,450.0,13386.0,2650.4,2704.1,8031.6,0,46851.0,312.0,MidriseApartment
+OfficeBuilding_01_Floor4,Bytový dům,officebuilding,4,True,150.0,450.0,13386.0,2650.4,2704.1,8031.6,0,46851.0,312.0,MidriseApartment
+ResidentialBuilding_02_Floor1,Bytový dům,residentialbuilding,1,False,150.0,450.0,13386.0,2650.4,2704.1,8031.6,0,46851.0,312.0,MidriseApartment
+ResidentialBuilding_02_Floor2,Bytový dům,residentialbuilding,2,True,150.0,522.2,13386.0,2650.4,2704.1,8031.6,0,46851.0,312.0,MidriseApartment
+CommercialBuilding_01_Floor1,Bytový dům,commercialbuilding,1,True,100.0,633.2,8924.0,1766.9,1802.7,5354.4,0,31234.0,312.0,MidriseApartment
