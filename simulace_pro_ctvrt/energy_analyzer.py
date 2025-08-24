@@ -1,6 +1,7 @@
 """
 Energy Analyzer - Hlavní analyzátor energetické spotřeby
 Využívá oficiální honeybee-energy standardy přes energy_config modul
++ GRAFICKÝ VÝSTUP místo jen textového
 """
 
 import os
@@ -158,6 +159,22 @@ class BuildingEnergyAnalyzer:
         print(display_df.to_string(index=False))
         print("-"*80)
     
+    def create_graphs(self, output_dir: str = 'output/graphs'):
+        """NOVÁ FUNKCE: Vytvoří grafické výstupy místo jen textové tabulky."""
+        try:
+            from energy_visualizer import EnergyVisualizer
+            
+            visualizer = EnergyVisualizer(self.analysis_results)
+            visualizer.create_all_visualizations(output_dir)
+            
+            print(f"\n🎯 GRAFICKÉ VÝSTUPY VYTVOŘENY!")
+            print(f"Složka: {os.path.abspath(output_dir)}")
+            
+        except ImportError:
+            print("⚠ Chyba: energy_visualizer.py není dostupný")
+            print("Pro grafické výstupy potřebujete matplotlib a seaborn:")
+            print("pip install matplotlib seaborn")
+    
     def save_results(self, output_dir: str = 'output'):
         """Uloží výsledky do CSV souboru."""
         if not self.analysis_results:
@@ -193,8 +210,14 @@ if __name__ == "__main__":
     if os.path.exists(model_path):
         print("Spouštím energetickou analýzu s honeybee standardy...")
         analyzer = analyze_district_energy(model_path)
+        
+        # Textový výstup (původní)
         analyzer.print_summary()
         analyzer.save_results()
+        
+        # NOVÉ: Grafický výstup
+        analyzer.create_graphs()
+        
     else:
         print(f"Model nenalezen: {model_path}")
         print("Nejprve spusťte create_small_district.py")

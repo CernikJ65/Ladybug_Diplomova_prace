@@ -5,7 +5,7 @@ Používá oficiální honeybee-energy-standards knihovnu
 
 from dataclasses import dataclass
 from typing import Dict, Any
-from honeybee_energy.lib.programtypes import building_program_type_by_identifier
+from honeybee_energy.lib.programtypes import building_program_type_by_identifier, program_type_by_identifier
 
 @dataclass
 class EnergyPrices:
@@ -26,7 +26,7 @@ class EnergyStandardsConfig:
     
     def _create_building_mapping(self) -> Dict[str, Dict[str, Any]]:
         """
-        Mapuje naše typy budov na oficiální honeybee-energy standardy.
+        Mapuje naše typy budov na officiální honeybee-energy standardy.
         
         Returns:
             Dict: Mapování typů budov na standardy
@@ -76,12 +76,17 @@ class EnergyStandardsConfig:
             return program_type, config
         except Exception as e:
             print(f"Chyba při načítání standardu {config['honeybee_type']}: {e}")
-            # Fallback na základní typ
+            # VYLEPŠENO: Používá oficiální pattern z ladybug-tools/honeybee-grasshopper-energy
             try:
-                program_type = building_program_type_by_identifier('MediumOffice')
-                return program_type, self.building_mapping['office']
-            except:
-                return None, config
+                program_type = program_type_by_identifier(config['honeybee_type'])
+                return program_type, config
+            except ValueError:
+                # Finální fallback
+                try:
+                    program_type = program_type_by_identifier('MediumOffice')
+                    return program_type, self.building_mapping['office']
+                except:
+                    return None, config
     
     def get_building_config(self, building_type: str) -> Dict[str, Any]:
         """Vrátí konfiguraci pro daný typ budovy."""
